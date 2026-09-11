@@ -1,0 +1,13 @@
+/* =============================================================
+   ConveGenius CLMS — Design System entry stylesheet
+   Consumers link THIS file; it pulls in every layer in order.
+   =============================================================
+   1. colors_and_type.css  — raw tokens + semantic element styles
+   2. clms.css             — token aliases used by the UI kit
+   3. clms-kit.css         — component classes (buttons, inputs, cards…)
+   ============================================================= */
+
+@import "fonts.css";
+@import "colors_and_type.css";
+@import "ui_kits/clms-web/clms.css";
+@import "ui_kits/clms-web/clms-kit.css";

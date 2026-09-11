@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="stylesheet" href="_ds/organic-0c9b27f9-a641-45a0-ab92-7b04f42ab839/styles.css">
+<script src="_ds/organic-0c9b27f9-a641-45a0-ab92-7b04f42ab839/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--color-bg);display:flex;justify-content:center;padding:20px 12px">
+<div style="width:100%;max-width:430px;display:flex;flex-direction:column;gap:16px">
+
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:46px;height:46px;flex:none;border-radius:999px;background:var(--color-accent-700);color:#ffffff;display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="3"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><path d="M8 16h.01"></path><path d="M16 16h.01"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:400 20px/1.15 var(--font-heading)">Practice Bot</div>
+<div style="font:500 13px/1.35 var(--font-body);color:var(--color-accent-2-700)">Practice only · nothing you type is real</div>
+</div>
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-2-700);background:var(--color-accent-2-200);border-radius:999px;padding:9px 14px;white-space:nowrap">{{ taskLabel }}</div>
+</div>
+
+<div style="background:var(--color-accent-2-200);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 12px/1 var(--font-body);color:var(--color-accent-2-700);letter-spacing:.08em">YOUR JOB RIGHT NOW</div>
+<div style="font:400 19px/1.35 var(--font-heading);color:var(--color-text)">{{ taskTitle }}</div>
+<div style="font:400 15px/1.55 var(--font-body);color:var(--color-accent-2-700)">{{ taskWhy }}</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ log }}" as="m" hint-placeholder-count="2">
+<div style="align-self:{{ m.align }};max-width:{{ m.max }};padding:{{ m.pad }};border-radius:{{ m.radius }};background:{{ m.bg }};color:{{ m.fg }};font:{{ m.font }}">{{ m.text }}</div>
+</sc-for>
+
+<sc-if value="{{ showFix }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--color-accent-200);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:400 19px/1.3 var(--font-heading);color:var(--color-accent-800)">{{ fixHead }}</div>
+<div style="font:400 16px/1.6 var(--font-body);color:var(--color-text)">{{ fixBody }}</div>
+<div style="background:#ffffff;border-radius:20px;padding:14px 16px;font:500 15px/1.55 var(--font-body);color:var(--color-accent-800)">{{ fixExample }}</div>
+<button onClick="{{ useFix }}" style="align-self:flex-start;min-height:48px;padding:12px 20px;border-radius:999px;background:var(--color-accent-700);border:0;color:#ffffff;font:600 15px/1 var(--font-body);cursor:pointer">Put this in my box</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ showWhy }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--color-surface);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.08em">WHY THE ANSWER CAME OUT THAT WAY</div>
+<sc-for list="{{ whyLines }}" as="w" hint-placeholder-count="2">
+<div style="font:400 16px/1.55 var(--font-body);color:var(--color-text)"><b>{{ w.your }}</b> {{ w.effect }}</div>
+</sc-for>
+<div style="font:400 15px/1.55 var(--font-body);color:var(--color-accent-700)">{{ whyCheck }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showDone }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--color-accent-2-200);border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:14px">
+<div style="font:400 26px/1.15 var(--font-heading);color:var(--color-text)">All three tasks done</div>
+<div style="font:400 16px/1.6 var(--font-body);color:var(--color-text)">You wrote a job message, asked for a tool list, and caught a wrong answer. That is the whole loop: ask, read, fix, ask again.</div>
+<div style="background:#ffffff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="font:600 15px/1.45 var(--font-body);color:var(--color-text)">Take this to your next job</div>
+<div style="font:400 15px/1.55 var(--font-body);color:var(--color-accent-2-700)">Say who you are. Say what you want. Add one detail. Then check the answer before you use it.</div>
+</div>
+<button onClick="{{ restart }}" style="min-height:52px;border-radius:999px;background:var(--color-accent-700);border:0;color:#ffffff;font:600 17px/1 var(--font-body);cursor:pointer">Practice again</button>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ composing }}" hint-placeholder-val="{{ true }}">
+<div style="background:var(--color-surface);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:14px">
+
+<div style="display:flex;gap:8px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px">
+<div style="height:10px;border-radius:999px;background:{{ c1bar }}"></div>
+<div style="font:600 12px/1.3 var(--font-body);color:{{ c1ink }}">Who you are</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px">
+<div style="height:10px;border-radius:999px;background:{{ c2bar }}"></div>
+<div style="font:600 12px/1.3 var(--font-body);color:{{ c2ink }}">What you want</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px">
+<div style="height:10px;border-radius:999px;background:{{ c3bar }}"></div>
+<div style="font:600 12px/1.3 var(--font-body);color:{{ c3ink }}">One detail</div>
+</div>
+</div>
+
+<textarea value="{{ draft }}" onChange="{{ onType }}" rows="4" placeholder="Type what you want to ask the AI" style="width:100%;box-sizing:border-box;padding:16px;border-radius:22px;border:2px solid var(--color-accent-300);background:#ffffff;font:400 17px/1.55 var(--font-body);color:var(--color-text);resize:none"></textarea>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+<button onClick="{{ c.add }}" style="min-height:44px;padding:11px 16px;border-radius:999px;background:#ffffff;border:0;cursor:pointer;font:500 14px/1.3 var(--font-body);color:var(--color-accent-700)">+ {{ c.label }}</button>
+</sc-for>
+</div>
+
+<div style="display:flex;gap:10px;align-items:center">
+<button onClick="{{ speak }}" style="width:56px;height:56px;flex:none;border-radius:999px;background:var(--color-accent-2-200);border:0;cursor:pointer;color:var(--color-accent-2-700);display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path></svg>
+</button>
+<sc-if value="{{ canSend }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ send }}" style="flex:1;min-height:56px;border-radius:999px;background:var(--color-accent-700);border:0;color:#ffffff;font:600 18px/1 var(--font-body);cursor:pointer" style-hover="background:var(--color-accent-800)">Send to AI</button>
+</sc-if>
+<sc-if value="{{ cannotSend }}" hint-placeholder-val="{{ true }}">
+<button disabled="true" style="flex:1;min-height:56px;border-radius:999px;background:var(--color-accent-700);border:0;color:#ffffff;font:600 18px/1 var(--font-body);opacity:.45;cursor:not-allowed">Send to AI</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ reviewing }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:10px">
+<button onClick="{{ redo }}" style="flex:1;min-height:56px;border-radius:999px;background:var(--color-surface);border:0;color:var(--color-accent-700);font:600 17px/1 var(--font-body);cursor:pointer">Ask it better</button>
+<sc-if value="{{ canAdvance }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ nextTask }}" style="flex:1;min-height:56px;border-radius:999px;background:var(--color-accent-700);border:0;color:#ffffff;font:600 17px/1 var(--font-body);cursor:pointer">{{ advanceLabel }}</button>
+</sc-if>
+</div>
+</sc-if>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:440,&quot;height&quot;:880}}">
+const TASKS = [
+  {
+    title: 'Ask AI to write a WhatsApp message for a shop owner',
+    why: 'You want two days a week at the cycle shop near your house. You do not know how to word it.',
+    chips: ['I am in Grade 10', 'write a WhatsApp message', 'keep it short and polite'],
+    need: { who: /grade|student|iti|i am|apprentice|\bage\b/, what: /message|whatsapp|write|ask.*(work|job)|job|work/, det: /short|polite|simple|two days|after school|hindi|weekend/ },
+    answer: 'Namaste sir. I am a Grade 10 student living near your shop. I want to learn cycle repair and can work two days a week after school. May I meet you this week?',
+    why_lines: [
+      { your: 'You said Grade 10.', effect: 'The message says student and "after school".' },
+      { your: 'You asked for a message.', effect: 'It wrote a message you can send, not advice about jobs.' },
+      { your: 'You said short and polite.', effect: 'It stayed at three lines and ended with a question.' }
+    ],
+    why_check: 'It guessed "this week". Change that if you cannot go this week.',
+    advance: 'Next task'
+  },
+  {
+    title: 'Ask AI which tools fix a leaking tap',
+    why: 'The tap in the workshop drips all day. Your instructor asked what you need before you open it.',
+    chips: ['I am an ITI student', 'what tools do I need', 'make a simple list'],
+    need: { who: /iti|student|i am|apprentice|workshop/, what: /tool|tap|leak|fix|repair|need/, det: /list|simple|steps|order|cheap|name/ },
+    answer: 'For a dripping tap you usually need: 1. Adjustable spanner. 2. Screwdriver set. 3. New washer or cartridge. 4. Plumber tape. 5. Cloth and bucket. Close the main valve before you open the tap.',
+    why_lines: [
+      { your: 'You named the job.', effect: 'It listed tap tools, not general plumbing tools.' },
+      { your: 'You asked for a list.', effect: 'It numbered the items instead of writing a paragraph.' }
+    ],
+    why_check: 'Washer sizes differ by tap. Measure yours or show the old one at the shop.',
+    advance: 'Next task'
+  },
+  {
+    title: 'Catch the mistake in an AI answer',
+    why: 'The bot will answer your question with one wrong line. Find it, then tell the bot what is wrong.',
+    chips: ['how do I test a fuse', 'explain in simple steps', 'I have a multimeter'],
+    need: { who: /i (have|am)|multimeter|student|iti/, what: /fuse|test|check|multimeter|continuity/, det: /step|simple|list|safe/ },
+    answer: 'To test a fuse: 1. Switch off the power. 2. Take the fuse out. 3. Set the multimeter to continuity. 4. Touch one probe to each end. A beep means the fuse is good. 5. If there is no beep, put the fuse back and switch the power on to be sure.',
+    why_lines: [
+      { your: 'Step 5 is wrong.', effect: 'Never power up a fuse you already know is dead. Replace it.' },
+      { your: 'This is the point.', effect: 'AI writes confident steps. You still check them against what you were taught.' }
+    ],
+    why_check: 'Tell your instructor when an AI answer contradicts your training. The training wins.',
+    advance: 'Finish'
+  }
+];
+const UNSAFE = /\d{6,}|my name is|my number|my phone|my address|aadhaar|father's name/i;
+const OFFTASK = /cricket|ipl|movie|song|film|actor|game|joke|girlfriend/i;
+
+class Component extends DCLogic {
+  state = { task: 0, draft: '', log: [], phase: 'compose', tries: 0 };
+
+  set(p) { this.setState(p); }
+
+  bubble(text, who) {
+    return who === 'you'
+      ? { text, align: 'flex-end', max: '90%', pad: '15px 19px', radius: '26px 26px 8px 26px',
+          bg: 'var(--color-accent-700)', fg: '#ffffff', font: '400 16px/1.55 var(--font-body)' }
+      : { text, align: 'flex-start', max: '95%', pad: '19px', radius: '26px 26px 26px 8px',
+          bg: 'var(--color-surface)', fg: 'var(--color-text)', font: '400 17px/1.65 var(--font-body)' };
+  }
+
+  parts(t) {
+    const n = TASKS[this.state.task].need;
+    const s = (t || '').toLowerCase();
+    return { who: n.who.test(s), what: n.what.test(s), det: n.det.test(s) };
+  }
+
+  send = () => {
+    const st = this.state, d = st.draft.trim(), T = TASKS[st.task];
+    const log = st.log.concat(this.bubble(d, 'you'));
+    if (UNSAFE.test(d)) {
+      this.set({ log, phase: 'unsafe', draft: '' }); return;
+    }
+    if (OFFTASK.test(d)) {
+      this.set({ log, phase: 'offtask', draft: '' }); return;
+    }
+    const p = this.parts(d);
+    const score = [p.who, p.what, p.det].filter(Boolean).length;
+    if (score < 2) {
+      this.set({ log: log.concat(this.bubble('I can try, but I do not have enough to work with yet.', 'bot')),
+        phase: 'weak', tries: st.tries + 1, draft: '' });
+      return;
+    }
+    this.set({ log: log.concat(this.bubble(T.answer, 'bot')), phase: 'answered', draft: '' });
+  };
+
+  renderVals() {
+    const st = this.state, T = TASKS[st.task];
+    const p = this.parts(st.draft);
+    const phase = st.phase;
+    const composing = phase === 'compose';
+    const bar = ok => ok ? 'var(--color-accent-2-500)' : '#f5ead8';
+    const ink = ok => ok ? 'var(--color-accent-2-700)' : 'var(--color-neutral-700)';
+
+    const missing = !p.what ? 'what' : !p.who ? 'who' : 'det';
+    const fixCopy = {
+      weak: {
+        head: missing === 'what' ? 'Tell me the job' : missing === 'who' ? 'Tell me who you are' : 'Add one detail',
+        body: missing === 'what' ? 'I do not know what you want me to do. Name the task in your own words.'
+          : missing === 'who' ? 'I answer better when I know who is asking. One line is enough.'
+          : 'One detail changes the whole answer — how long, how simple, in what order.',
+        example: T.chips.join('. ') + '.'
+      },
+      unsafe: {
+        head: 'Stop. I did not send that.',
+        body: 'That has your name, number or address in it. Never type those into an AI tool — not this one, not any other.',
+        example: T.chips.join('. ') + '.'
+      },
+      offtask: {
+        head: 'Not in this lab',
+        body: 'This bot is for study and work tasks. Ask me the task above instead.',
+        example: T.chips.join('. ') + '.'
+      }
+    }[phase];
+
+    return {
+      taskLabel: 'Task ' + (st.task + 1) + ' of 3',
+      taskTitle: T.title, taskWhy: T.why,
+      log: st.log,
+      composing, reviewing: phase === 'answered',
+      showFix: phase === 'weak' || phase === 'unsafe' || phase === 'offtask',
+      fixHead: fixCopy ? fixCopy.head : '', fixBody: fixCopy ? fixCopy.body : '',
+      fixExample: fixCopy ? fixCopy.example : '',
+      useFix: () => this.set({ draft: T.chips.join('. ') + '.', phase: 'compose' }),
+      showWhy: phase === 'answered',
+      whyLines: T.why_lines, whyCheck: T.why_check,
+      showDone: phase === 'done',
+      restart: () => this.set({ task: 0, draft: '', log: [], phase: 'compose', tries: 0 }),
+      c1bar: bar(p.who), c2bar: bar(p.what), c3bar: bar(p.det),
+      c1ink: ink(p.who), c2ink: ink(p.what), c3ink: ink(p.det),
+      draft: st.draft,
+      onType: e => this.set({ draft: e.target.value }),
+      chips: T.chips.map(label => ({ label,
+        add: () => this.set({ draft: (st.draft.trim() ? st.draft.trim().replace(/\.$/, '') + '. ' : '') + label + '.' }) })),
+      speak: () => this.set({ draft: T.chips.join('. ') + '.' }),
+      canSend: st.draft.trim().length > 3, cannotSend: st.draft.trim().length <= 3,
+      send: this.send,
+      redo: () => this.set({ phase: 'compose' }),
+      canAdvance: phase === 'answered',
+      advanceLabel: T.advance,
+      nextTask: () => {
+        if (st.task === 2) { this.set({ phase: 'done' }); return; }
+        this.set({ task: st.task + 1, phase: 'compose', draft: '', log: [], tries: 0 });
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="stylesheet" href="_ds/organic-0c9b27f9-a641-45a0-ab92-7b04f42ab839/styles.css">
+<script src="_ds/organic-0c9b27f9-a641-45a0-ab92-7b04f42ab839/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--color-bg);display:flex;justify-content:center;padding:26px 14px">
+<div style="width:100%;max-width:430px;display:flex;flex-direction:column;gap:22px">
+
+<div style="display:flex;align-items:center;gap:14px;min-height:56px">
+<sc-if value="{{ canExit }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ goHome }}" style="width:52px;height:52px;flex:none;border-radius:999px;background:var(--color-surface);border:0;color:var(--color-text);display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+</button>
+</sc-if>
+<sc-if value="{{ atHome }}" hint-placeholder-val="{{ true }}">
+<div style="width:52px;height:52px;flex:none;border-radius:999px;background:var(--color-accent);color:#ffffff;display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+</div>
+</sc-if>
+<div style="flex:1;min-width:0">
+<div style="font:400 19px/1.2 var(--font-heading);color:var(--color-text)">{{ headTitle }}</div>
+<div style="font:500 14px/1.35 var(--font-body);color:var(--color-accent-2-700)">{{ headSub }}</div>
+</div>
+</div>
+
+<sc-if value="{{ vHome }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:400 34px/1.1 var(--font-heading);color:var(--color-text)">Learn AI at your own speed</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-accent-2-700)">Five short steps. Nothing is timed. Repeat any step.</div>
+</div>
+
+<div style="background:var(--color-surface);border-radius:28px;padding:22px;display:flex;align-items:center;gap:14px">
+<div style="flex:1;height:14px;border-radius:999px;background:#f5ead8;overflow:hidden"><div style="height:14px;border-radius:999px;background:var(--color-accent-2-500);width:{{ coursePct }}"></div></div>
+<div style="font:600 15px/1 var(--font-body);color:var(--color-accent-2-700);white-space:nowrap">{{ courseCount }}</div>
+</div>
+
+<button onClick="{{ openCurrent }}" style="text-align:left;background:var(--color-accent-700);border:0;border-radius:28px;padding:24px;cursor:pointer;display:flex;flex-direction:column;gap:10px" style-hover="background:var(--color-accent-800)">
+<div style="font:600 13px/1 var(--font-body);color:#ffffff;letter-spacing:.08em">CONTINUE</div>
+<div style="font:400 26px/1.15 var(--font-heading);color:#ffffff">{{ currentTitle }}</div>
+<div style="font:500 16px/1.5 var(--font-body);color:#ffffff">{{ currentSub }}</div>
+</button>
+
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:400 20px/1.2 var(--font-heading);color:var(--color-text)">All steps</div>
+
+<button onClick="{{ open0 }}" style="text-align:left;width:100%;background:var(--color-surface);border:0;border-radius:28px;padding:18px;display:flex;gap:16px;align-items:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:{{ bg0 }};color:{{ ink0 }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 17px/1.3 var(--font-body);color:var(--color-text)">What AI can and cannot do</div>
+<div style="font:500 14px/1.45 var(--font-body);color:var(--color-accent-2-700)">{{ meta0 }}</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-2-600);flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+
+<button onClick="{{ open1 }}" style="text-align:left;width:100%;background:var(--color-surface);border:0;border-radius:28px;padding:18px;display:flex;gap:16px;align-items:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:{{ bg1 }};color:{{ ink1 }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="3"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><path d="M8 16h.01"></path><path d="M16 16h.01"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 17px/1.3 var(--font-body);color:var(--color-text)">Practice Bot — First Contact</div>
+<div style="font:500 14px/1.45 var(--font-body);color:var(--color-accent-2-700)">{{ meta1 }}</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-2-600);flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+
+<button onClick="{{ open2 }}" style="text-align:left;width:100%;background:var(--color-surface);border:0;border-radius:28px;padding:18px;display:flex;gap:16px;align-items:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:{{ bg2 }};color:{{ ink2 }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m8 11 2 2 4-4"></path><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 17px/1.3 var(--font-body);color:var(--color-text)">Check a wrong answer</div>
+<div style="font:500 14px/1.45 var(--font-body);color:var(--color-accent-2-700)">{{ meta2 }}</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-2-600);flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+
+<button onClick="{{ open3 }}" style="text-align:left;width:100%;background:var(--color-surface);border:0;border-radius:28px;padding:18px;display:flex;gap:16px;align-items:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:{{ bg3 }};color:{{ ink3 }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 17px/1.3 var(--font-body);color:var(--color-text)">Keep your details safe</div>
+<div style="font:500 14px/1.45 var(--font-body);color:var(--color-accent-2-700)">{{ meta3 }}</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-2-600);flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+
+<button onClick="{{ open4 }}" style="text-align:left;width:100%;background:var(--color-surface);border:0;border-radius:28px;padding:18px;display:flex;gap:16px;align-items:center;cursor:pointer" style-hover="background:var(--color-accent-200)">
+<div style="width:56px;height:56px;flex:none;border-radius:999px;background:{{ bg4 }};color:{{ ink4 }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 17px/1.3 var(--font-body);color:var(--color-text)">Use AI in your trade</div>
+<div style="font:500 14px/1.45 var(--font-body);color:var(--color-accent-2-700)">{{ meta4 }}</div>
+</div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-2-600);flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+</button>
+
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ vLesson }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="font:400 30px/1.15 var(--font-heading);color:var(--color-text)">{{ lessonTitle }}</div>
+<div style="height:150px;border-radius:28px;background:var(--color-accent-2-200);color:var(--color-accent-2-700);display:flex;align-items:center;justify-content:center">
+<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:400 20px/1.25 var(--font-heading);color:var(--color-text)">AI answers what you ask</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-accent-2-700);margin-top:8px">AI reads your words and writes an answer. It does not know you. It only knows what you type.</div>
+</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:400 20px/1.25 var(--font-heading);color:var(--color-text)">Better words, better answer</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-accent-2-700);margin-top:8px">If you say who you are and what you want, the answer fits your work.</div>
+</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:400 20px/1.25 var(--font-heading);color:var(--color-text)">AI can be wrong</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-accent-2-700);margin-top:8px">Check any fact before you use it in real work. Ask your instructor if you are unsure.</div>
+</div>
+<button onClick="{{ startBot }}" style="width:100%;min-height:58px;border-radius:999px;background:var(--color-accent);border:0;color:#ffffff;font:600 18px/1 var(--font-body);cursor:pointer" style-hover="background:var(--color-accent-600)">Practice with the bot</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ inBot }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:22px">
+
+<div style="display:flex;align-items:center;gap:14px">
+<div style="flex:1;height:14px;border-radius:999px;background:var(--color-surface);overflow:hidden"><div style="height:14px;border-radius:999px;background:var(--color-accent);width:{{ botPct }}"></div></div>
+<div style="font:600 15px/1 var(--font-body);color:var(--color-accent-2-700);white-space:nowrap">{{ botStepLabel }}</div>
+</div>
+
+<sc-if value="{{ b0 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="height:170px;border-radius:28px;background:var(--color-accent-200);color:var(--color-accent-700);display:flex;align-items:center;justify-content:center">
+<svg width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="3"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><path d="M8 16h.01"></path><path d="M16 16h.01"></path></svg>
+</div>
+<div style="font:400 32px/1.12 var(--font-heading);color:var(--color-text)">This is a practice bot</div>
+<div style="font:400 18px/1.6 var(--font-body);color:var(--color-accent-2-700)">Nothing here is real. No one sees your answers. Try again as many times as you want.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b1 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="font:400 28px/1.15 var(--font-heading);color:var(--color-text)">Three rules first</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-accent-2-700)">Tap each rule to accept it.</div>
+<sc-for list="{{ rules }}" as="r" hint-placeholder-count="3">
+<button onClick="{{ r.toggle }}" style="width:100%;min-height:72px;text-align:left;display:flex;gap:16px;align-items:center;padding:18px;border-radius:28px;background:{{ r.bg }};border:0;cursor:pointer">
+<div style="width:44px;height:44px;flex:none;border-radius:999px;background:{{ r.dotBg }};color:{{ r.dotInk }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ r.on }}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+</sc-if>
+<sc-if value="{{ r.off }}" hint-placeholder-val="{{ true }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle></svg>
+</sc-if>
+</div>
+<span style="font:500 16px/1.5 var(--font-body);color:var(--color-text)">{{ r.text }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ b2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:400 28px/1.15 var(--font-heading);color:var(--color-text)">Watch one example</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.08em;margin-bottom:10px">THE TASK</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text)">You want part-time work at a bike shop. You need a WhatsApp message for the shop owner.</div>
+</div>
+<div style="font:400 20px/1.2 var(--font-heading);color:var(--color-text)">A good prompt has three parts</div>
+<div style="background:var(--color-accent-200);border-radius:28px;padding:20px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.06em">1 · WHO YOU ARE</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-text);margin-top:8px">I am in Grade 10.</div>
+</div>
+<div style="background:var(--color-accent-2-200);border-radius:28px;padding:20px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-2-700);letter-spacing:.06em">2 · WHAT YOU WANT</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-text);margin-top:8px">Write a WhatsApp message to a bike shop owner asking for part-time work.</div>
+</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:20px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-2-700);letter-spacing:.06em">3 · ONE DETAIL</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-text);margin-top:8px">Keep it short and polite.</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:400 28px/1.15 var(--font-heading);color:var(--color-text)">Now you build it</div>
+<div style="font:400 17px/1.55 var(--font-body);color:var(--color-accent-2-700)">Tap one card in each row.</div>
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.06em">1 · WHO YOU ARE</div>
+<sc-for list="{{ rowWho }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:56px;text-align:left;padding:16px 20px;border-radius:28px;background:{{ c.bg }};border:0;color:{{ c.ink }};font:500 16px/1.45 var(--font-body);cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-2-700);letter-spacing:.06em">2 · WHAT YOU WANT</div>
+<sc-for list="{{ rowWhat }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:56px;text-align:left;padding:16px 20px;border-radius:28px;background:{{ c.bg }};border:0;color:{{ c.ink }};font:500 16px/1.45 var(--font-body);cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-2-700);letter-spacing:.06em">3 · ONE DETAIL</div>
+<sc-for list="{{ rowDet }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:56px;text-align:left;padding:16px 20px;border-radius:28px;background:{{ c.bg }};border:0;color:{{ c.ink }};font:500 16px/1.45 var(--font-body);cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.06em">YOUR PROMPT</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text);margin-top:10px">{{ builtPrompt }}</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b4 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="align-self:flex-end;max-width:90%;padding:16px 20px;border-radius:28px 28px 8px 28px;background:var(--color-accent-700);color:#ffffff;font:400 16px/1.55 var(--font-body)">{{ builtPrompt }}</div>
+<div style="display:flex;gap:10px;align-items:center;color:var(--color-accent-2-700)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="3"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path></svg>
+<span style="font:600 14px/1 var(--font-body)">AI answer</span>
+</div>
+<div style="padding:22px;border-radius:28px;background:var(--color-surface);font:400 17px/1.65 var(--font-body);color:var(--color-text)">Namaste sir. I am a Grade 10 student. I want part-time work at your bike shop after school. I can come after 4 pm. Please tell me if any work is open. Thank you.</div>
+<button onClick="{{ toggleWhy }}" style="align-self:flex-start;display:flex;gap:10px;align-items:center;min-height:52px;padding:14px 20px;border-radius:999px;background:var(--color-accent-2-200);border:0;cursor:pointer;font:600 15px/1 var(--font-body);color:var(--color-accent-2-700)">
+<sc-if value="{{ whyOpen }}" hint-placeholder-val="{{ false }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"></path></svg>
+</sc-if>
+<sc-if value="{{ whyClosed }}" hint-placeholder-val="{{ true }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.4 9.5a2.7 2.7 0 0 1 5.2.9c0 1.8-2.6 2.7-2.6 2.7"></path><path d="M12 17h.01"></path></svg>
+</sc-if>
+Why this answer?
+</button>
+<sc-if value="{{ whyOpen }}" hint-placeholder-val="{{ false }}">
+<div style="padding:22px;border-radius:28px;background:var(--color-surface);display:flex;flex-direction:column;gap:14px">
+<div style="font:400 16px/1.55 var(--font-body);color:var(--color-text)"><b>You said Grade 10</b> — so it wrote "after school".</div>
+<div style="font:400 16px/1.55 var(--font-body);color:var(--color-text)"><b>You asked for a message</b> — so it wrote a message, not a list.</div>
+<div style="font:400 16px/1.55 var(--font-body);color:var(--color-text)"><b>You said short and polite</b> — so it is five short lines.</div>
+<div style="font:400 15px/1.55 var(--font-body);color:var(--color-accent-700)">Check before you send: the AI guessed "after 4 pm". Change it if that is wrong.</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ b5 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:400 28px/1.15 var(--font-heading);color:var(--color-text)">Your turn. No cards.</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.06em;margin-bottom:10px">THE TASK</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text)">A tap in the workshop is leaking. Ask the AI what tools you need.</div>
+</div>
+<button onClick="{{ speak }}" style="width:100%;min-height:64px;display:flex;gap:12px;align-items:center;justify-content:center;border-radius:999px;background:var(--color-accent-2-200);border:0;cursor:pointer;font:600 17px/1 var(--font-body);color:var(--color-accent-2-700)">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path></svg>
+Speak instead of typing
+</button>
+<textarea value="{{ typed }}" onChange="{{ onType }}" rows="4" placeholder="Type your prompt here" style="width:100%;box-sizing:border-box;padding:18px;border-radius:28px;border:2px solid var(--color-accent-300);background:#ffffff;font:400 17px/1.55 var(--font-body);color:var(--color-text);resize:none"></textarea>
+<div style="font:500 14px/1.5 var(--font-body);color:var(--color-accent-2-700)">Stuck? Tap a starter and change the words.</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<sc-for list="{{ starters }}" as="s" hint-placeholder-count="3">
+<button onClick="{{ s.use }}" style="min-height:52px;padding:14px 20px;border-radius:999px;background:var(--color-surface);border:0;cursor:pointer;font:500 15px/1.35 var(--font-body);color:var(--color-accent-700)">{{ s.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b6 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="align-self:flex-end;max-width:90%;padding:16px 20px;border-radius:28px 28px 8px 28px;background:var(--color-accent-700);color:#ffffff;font:400 16px/1.55 var(--font-body)">{{ typed }}</div>
+<sc-if value="{{ vUnsafe }}" hint-placeholder-val="{{ false }}">
+<div style="padding:22px;border-radius:28px;background:var(--color-accent-200);display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:12px;align-items:center;color:var(--color-accent-800)">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+<span style="font:400 21px/1.25 var(--font-heading)">Stop. Take out your details.</span>
+</div>
+<div style="font:400 16px/1.6 var(--font-body);color:var(--color-text)">I did not send this. Your prompt has a phone number, name or address. Never put these into an AI tool.</div>
+<div style="font:400 16px/1.6 var(--font-body);color:var(--color-text)">Ask about the work only: "What tools do I need to fix a leaking tap?"</div>
+</div>
+</sc-if>
+<sc-if value="{{ vOff }}" hint-placeholder-val="{{ false }}">
+<div style="padding:22px;border-radius:28px;background:var(--color-surface);display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:12px;align-items:center;color:var(--color-accent-2-700)">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<span style="font:400 21px/1.25 var(--font-heading);color:var(--color-text)">This bot is for study and work</span>
+</div>
+<div style="font:400 16px/1.6 var(--font-body);color:var(--color-text)">Your question is off the task. Try the tap task again.</div>
+</div>
+</sc-if>
+<sc-if value="{{ vAnswer }}" hint-placeholder-val="{{ false }}">
+<div style="padding:22px;border-radius:28px;background:var(--color-surface);font:400 17px/1.65 var(--font-body);color:var(--color-text)">{{ aiReply }}</div>
+</sc-if>
+<div style="padding:22px;border-radius:28px;background:var(--color-accent-2-200);display:flex;flex-direction:column;gap:14px">
+<div style="font:600 15px/1.35 var(--font-body);color:var(--color-accent-2-700)">Your prompt had {{ scoreText }}</div>
+<sc-for list="{{ meter }}" as="m" hint-placeholder-count="3">
+<div style="display:flex;gap:12px;align-items:flex-start">
+<div style="flex:none;color:{{ m.ink }};padding-top:2px">
+<sc-if value="{{ m.ok }}" hint-placeholder-val="{{ true }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-4.5"></path></svg>
+</sc-if>
+<sc-if value="{{ m.no }}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke-dasharray="4 4"></circle></svg>
+</sc-if>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 15px/1.4 var(--font-body);color:var(--color-text)">{{ m.label }}</div>
+<div style="font:400 15px/1.5 var(--font-body);color:var(--color-accent-2-700)">{{ m.note }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<button onClick="{{ retry }}" style="width:100%;min-height:56px;border-radius:999px;background:var(--color-surface);border:0;color:var(--color-accent-700);font:600 17px/1 var(--font-body);cursor:pointer">Change my prompt</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ b7 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:400 28px/1.15 var(--font-heading);color:var(--color-text)">One question before you finish</div>
+<div style="font:400 18px/1.6 var(--font-body);color:var(--color-accent-2-700)">Can you write a prompt on your own now?</div>
+<sc-for list="{{ confOpts }}" as="c" hint-placeholder-count="3">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:64px;text-align:left;padding:18px 22px;border-radius:999px;background:{{ c.bg }};border:0;cursor:pointer;font:600 17px/1.35 var(--font-body);color:{{ c.ink }}">{{ c.label }}</button>
+</sc-for>
+<sc-if value="{{ confDone }}" hint-placeholder-val="{{ false }}">
+<div style="padding:22px;border-radius:28px;background:var(--color-surface);font:400 16px/1.6 var(--font-body);color:var(--color-text)">{{ confNote }}</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ b8 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="height:150px;border-radius:28px;background:var(--color-accent-2-200);color:var(--color-accent-2-700);display:flex;align-items:center;justify-content:center">
+<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-4.5"></path></svg>
+</div>
+<div style="font:400 32px/1.12 var(--font-heading);color:var(--color-text)">Step 2 done</div>
+<div style="background:var(--color-surface);border-radius:28px;padding:22px;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 13px/1 var(--font-body);color:var(--color-accent-700);letter-spacing:.06em">YOU CAN NOW</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text)">Write a prompt with who, what and one detail.</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text)">Check an AI answer before you use it.</div>
+<div style="font:400 17px/1.6 var(--font-body);color:var(--color-text)">Keep your personal details out of AI tools.</div>
+</div>
+</div>
+</sc-if>
+
+<div style="display:flex;gap:12px;align-items:center;padding-top:4px">
+<sc-if value="{{ canBack }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ botBack }}" style="width:58px;height:58px;flex:none;border-radius:999px;background:var(--color-surface);border:0;cursor:pointer;color:var(--color-text);display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+</button>
+</sc-if>
+<sc-if value="{{ ctaOn }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ botNext }}" style="flex:1;min-height:58px;border-radius:999px;background:var(--color-accent);border:0;color:#ffffff;font:600 18px/1 var(--font-body);cursor:pointer" style-hover="background:var(--color-accent-600)">{{ ctaLabel }}</button>
+</sc-if>
+<sc-if value="{{ ctaOff }}" hint-placeholder-val="{{ false }}">
+<button disabled="true" style="flex:1;min-height:58px;border-radius:999px;background:var(--color-accent);border:0;color:#ffffff;font:600 18px/1 var(--font-body);opacity:.45;cursor:not-allowed">{{ ctaLabel }}</button>
+</sc-if>
+</div>
+
+</div>
+</sc-if>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:440,&quot;height&quot;:860}}">
+const TITLES = ['What AI can and cannot do', 'Practice Bot — First Contact', 'Check a wrong answer', 'Keep your details safe', 'Use AI in your trade'];
+const METAS = ['4 min read', 'Practice · 10 min', 'Practice · 8 min', '5 min read', 'Final task · 15 min'];
+const RULES = [
+  'Do not type your name, phone number or address.',
+  'AI can be wrong. Check facts before you use them.',
+  'Ask only about study or work.'
+];
+const WHO = ['I am in Grade 10', 'I finished ITI welding'];
+const WHAT = ['Write a WhatsApp message to a bike shop owner asking for part-time work', 'Explain what a bike mechanic does'];
+const DET = ['Keep it short and polite', 'Use simple English'];
+const STARTERS = ['tools for leaking tap', 'I am an ITI student…', 'Make a simple list'];
+const CTA = ['Start', 'I understand', 'Now you try', 'Send prompt', 'Next', 'Send prompt', 'Next', 'Next', 'Back to course'];
+
+class Component extends DCLogic {
+  state = { view: 'home', lesson: 0, done: [false, false, false, false, false], step: 0,
+    rules: [false, false, false], who: null, what: null, det: null,
+    typed: '', verdict: null, whyOpen: false, conf: null };
+
+  set(p) { this.setState(p); }
+  reset() { this.set({ step: 0, rules: [false, false, false], who: null, what: null, det: null, typed: '', verdict: null, whyOpen: false, conf: null }); }
+
+  judge(t) {
+    const s = (t || '').toLowerCase();
+    if (/\d{6,}|my name is|phone|address|aadhaar|mobile number/.test(s)) return 'unsafe';
+    if (/cricket|movie|song|game|film|ipl|joke/.test(s)) return 'off';
+    if (s.trim().length < 25) return 'weak';
+    return 'good';
+  }
+
+  open(i) {
+    if (i === 1) { this.reset(); this.set({ view: 'bot' }); return; }
+    this.set({ view: 'lesson', lesson: i });
+  }
+
+  chipRow(list, key) {
+    return list.map((label, i) => {
+      const on = this.state[key] === i;
+      return { label, bg: on ? 'var(--color-accent-700)' : 'var(--color-surface)',
+        ink: on ? '#ffffff' : 'var(--color-text)', pick: () => this.set({ [key]: i }) };
+    });
+  }
+
+  renderVals() {
+    const st = this.state, view = st.view, step = st.step;
+    const inBot = view === 'bot';
+    const doneCount = st.done.filter(Boolean).length;
+
+    const parts = [];
+    if (st.who !== null) parts.push(WHO[st.who] + '.');
+    if (st.what !== null) parts.push(WHAT[st.what] + '.');
+    if (st.det !== null) parts.push(DET[st.det]);
+    const built = parts.length ? parts.join(' ') : 'Tap a card above to start your prompt.';
+
+    const s = (st.typed || '').toLowerCase();
+    const mk = (ok, label, yes, no) => ({ ok, no: !ok, label,
+      ink: ok ? 'var(--color-accent-2-700)' : 'var(--color-accent-700)', note: ok ? yes : no });
+    const meter = [
+      mk(/grade|student|iti|i am|apprentice/.test(s), 'Who you are', 'You said you are a student.', 'Add who you are, e.g. "I am an ITI student".'),
+      mk(/tool|tap|leak|fix|need|what|how/.test(s), 'What you want', 'You asked about tools for the tap.', 'Say the job clearly: fix a leaking tap.'),
+      mk(s.trim().split(/\s+/).filter(Boolean).length >= 9, 'One detail', 'You added enough detail.', 'Add one detail, e.g. "make a simple list".')
+    ];
+    const okCount = meter.filter(x => x.ok).length;
+
+    let ctaEnabled = true;
+    if (step === 1) ctaEnabled = st.rules.every(Boolean);
+    if (step === 3) ctaEnabled = st.who !== null && st.what !== null && st.det !== null;
+    if (step === 5) ctaEnabled = st.typed.trim().length > 3;
+    if (step === 7) ctaEnabled = st.conf !== null;
+
+    const nextIdx = st.done.findIndex(d => !d);
+    const cur = nextIdx < 0 ? 4 : nextIdx;
+    const confNotes = ['That is fine. This step stays open. Do it again with the cards on.',
+      'Good. Try one more prompt with no cards.',
+      'Good. Step 3 gives you a harder task with no cards.'];
+
+    const out = {
+      atHome: view === 'home', canExit: view !== 'home',
+      vHome: view === 'home', vLesson: view === 'lesson', inBot,
+      headTitle: view === 'home' ? 'Swift AI Academy' : inBot ? 'Practice Bot' : TITLES[st.lesson],
+      headSub: view === 'home' ? 'Applied AI · Level 1' : inBot ? 'Step 2 · First Contact' : 'Step ' + (st.lesson + 1),
+      coursePct: Math.round((doneCount / 5) * 100) + '%',
+      courseCount: doneCount + ' of 5',
+      currentTitle: TITLES[cur], currentSub: METAS[cur],
+      openCurrent: () => this.open(cur),
+      lessonTitle: TITLES[st.lesson],
+      startBot: () => { this.reset(); this.set({ view: 'bot' }); },
+      goHome: () => this.set({ view: 'home' }),
+      b0: inBot && step === 0, b1: inBot && step === 1, b2: inBot && step === 2,
+      b3: inBot && step === 3, b4: inBot && step === 4, b5: inBot && step === 5,
+      b6: inBot && step === 6, b7: inBot && step === 7, b8: inBot && step === 8,
+      botPct: Math.round(((step + 1) / 9) * 100) + '%',
+      botStepLabel: (step + 1) + ' of 9',
+      rules: RULES.map((text, i) => ({ text, on: st.rules[i], off: !st.rules[i],
+        bg: st.rules[i] ? 'var(--color-accent-2-200)' : 'var(--color-surface)',
+        dotBg: st.rules[i] ? 'var(--color-accent-2-500)' : '#f5ead8',
+        dotInk: st.rules[i] ? '#ffffff' : 'var(--color-accent-2-700)',
+        toggle: () => { const r = st.rules.slice(); r[i] = !r[i]; this.set({ rules: r }); } })),
+      rowWho: this.chipRow(WHO, 'who'), rowWhat: this.chipRow(WHAT, 'what'), rowDet: this.chipRow(DET, 'det'),
+      builtPrompt: built,
+      whyOpen: st.whyOpen, whyClosed: !st.whyOpen,
+      toggleWhy: () => this.set({ whyOpen: !st.whyOpen }),
+      typed: st.typed, onType: e => this.set({ typed: e.target.value }),
+      starters: STARTERS.map(label => ({ label, use: () => this.set({ typed:
+        label === 'tools for leaking tap' ? 'What tools do I need to fix a leaking tap?'
+        : label === 'Make a simple list' ? (st.typed + ' Make a simple list.').trim()
+        : 'I am an ITI student. ' + st.typed }) })),
+      speak: () => this.set({ typed: 'I am an ITI student. What tools do I need to fix a leaking tap? Make a simple list.' }),
+      vUnsafe: st.verdict === 'unsafe', vOff: st.verdict === 'off',
+      vAnswer: st.verdict === 'good' || st.verdict === 'weak',
+      aiReply: st.verdict === 'good'
+        ? 'You will need: 1. Pipe wrench. 2. Adjustable spanner. 3. New washer or O-ring. 4. Teflon tape. 5. A cloth and bucket. Close the main valve first.'
+        : 'I am not sure what you need. Tell me the job and one detail.',
+      scoreText: okCount + ' of 3 parts', meter,
+      confOpts: ['Not yet', 'Almost', 'Yes, I can'].map((label, i) => ({ label,
+        bg: st.conf === i ? 'var(--color-accent-700)' : 'var(--color-surface)',
+        ink: st.conf === i ? '#ffffff' : 'var(--color-text)',
+        pick: () => this.set({ conf: i }) })),
+      confDone: st.conf !== null, confNote: st.conf !== null ? confNotes[st.conf] : '',
+      ctaLabel: CTA[step], ctaOn: ctaEnabled, ctaOff: !ctaEnabled,
+      canBack: step > 0,
+      botBack: () => this.set({ step: Math.max(0, step - 1) }),
+      retry: () => this.set({ step: 5, verdict: null }),
+      botNext: () => {
+        if (step === 5) { this.set({ verdict: this.judge(st.typed), step: 6 }); return; }
+        if (step === 8) { const d = st.done.slice(); d[0] = true; d[1] = true;
+          this.set({ done: d, view: 'home' }); this.reset(); return; }
+        this.set({ step: step + 1 });
+      }
+    };
+    for (let i = 0; i < 5; i++) {
+      const done = st.done[i];
+      out['open' + i] = () => this.open(i);
+      out['meta' + i] = done ? 'Done · you can repeat it' : METAS[i];
+      out['bg' + i] = done ? 'var(--color-accent-2-500)' : 'var(--color-accent-200)';
+      out['ink' + i] = done ? '#ffffff' : 'var(--color-accent-700)';
+    }
+    return out;
+  }
+}
+
+</script>
+</body>
+</html>

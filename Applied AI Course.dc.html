@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="stylesheet" href="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/fonts.css">
+<link rel="stylesheet" href="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/colors_and_type.css">
+<link rel="stylesheet" href="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/ui_kits/clms-web/clms.css">
+<link rel="stylesheet" href="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/ui_kits/clms-web/clms-kit.css">
+<link rel="stylesheet" href="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+<script src="_ds/clms-design-system-205a7be3-485a-496f-9221-6f8867e9b75d/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#F3F3F3;font-family:Inter,system-ui,sans-serif;color:#344054}
+a{color:#1F9CFC}a:hover{color:#1565D8}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#F3F3F3;display:flex;justify-content:center;padding:24px 12px">
+<div style="width:100%;max-width:420px;background:#F9FAFC;border:1px solid #EAECF0;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-height:780px">
+
+<div style="background:#fff;border-bottom:1px solid #EAECF0;padding:14px 16px;display:flex;align-items:center;gap:12px">
+<sc-if value="{{ atHome }}" hint-placeholder-val="{{ true }}">
+<div style="width:32px;height:32px;border-radius:4px;background:#4964AD;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px"><i class="ri-graduation-cap-line"></i></div>
+</sc-if>
+<sc-if value="{{ canExit }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ goHome }}" style="width:36px;height:36px;flex:none;border-radius:4px;background:#fff;border:1px solid #D4DAE5;color:#57637C;font-size:19px;cursor:pointer" style-hover="background:#F1F4FA"><i class="ri-arrow-left-line"></i></button>
+</sc-if>
+<div style="flex:1;min-width:0">
+<div style="font:600 15px/1.25 Inter,sans-serif;color:#344054">{{ headTitle }}</div>
+<div style="font:400 12px/1.35 Inter,sans-serif;color:#738CA5">{{ headSub }}</div>
+</div>
+<sc-if value="{{ inBot }}" hint-placeholder-val="{{ false }}">
+<div style="font:500 11px/1 Inter,sans-serif;color:#0C7A6C;background:#E0F3F2;border-radius:9999px;padding:6px 10px">Practice only</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ inBot }}" hint-placeholder-val="{{ false }}">
+<div style="background:#fff;border-bottom:1px solid #EAECF0;padding:12px 16px;display:flex;align-items:center;gap:10px">
+<div style="flex:1;height:8px;border-radius:9999px;background:#EAECF0;overflow:hidden"><div style="height:8px;background:#4964AD;width:{{ botPct }}"></div></div>
+<div style="font:500 11px/1 Inter,sans-serif;color:#57637C;white-space:nowrap">{{ botStepLabel }}</div>
+</div>
+</sc-if>
+
+<div style="flex:1;padding:20px 16px 24px;display:flex;flex-direction:column;gap:16px">
+
+<sc-if value="{{ vHome }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font:700 24px/1.25 Inter,sans-serif;color:#344054">Applied AI</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#57637C">Swift AI Academy · Level 1 · Learn at your own speed.</div>
+</div>
+
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:10px">
+<div style="flex:1;height:8px;border-radius:9999px;background:#EAECF0;overflow:hidden"><div style="height:8px;background:#4964AD;width:{{ coursePct }}"></div></div>
+<div style="font:600 12px/1 Inter,sans-serif;color:#57637C;white-space:nowrap">{{ courseCount }}</div>
+</div>
+<div style="font:400 13px/1.5 Inter,sans-serif;color:#738CA5">Nothing is timed. You can repeat any step.</div>
+</div>
+
+<button onClick="{{ openCurrent }}" style="text-align:left;background:#4964AD;border:1px solid #4964AD;border-radius:8px;padding:18px;cursor:pointer;display:flex;flex-direction:column;gap:8px" style-hover="background:#365CC2">
+<div style="font:600 11px/1 Inter,sans-serif;color:#C5D0E5;letter-spacing:.04em">CONTINUE</div>
+<div style="font:700 19px/1.35 Inter,sans-serif;color:#fff">{{ currentTitle }}</div>
+<div style="font:400 14px/1.5 Inter,sans-serif;color:#E5E9F1">{{ currentSub }}</div>
+<div style="margin-top:4px;display:flex;align-items:center;gap:6px;font:600 14px/1 Inter,sans-serif;color:#fff">{{ currentCta }}<i class="ri-arrow-right-line" style="font-size:16px"></i></div>
+</button>
+
+<div style="font:600 13px/1 Inter,sans-serif;color:#57637C;margin-top:4px">All steps</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+<button onClick="{{ s.open }}" style="text-align:left;width:100%;background:{{ s.bg }};border:1px solid {{ s.bd }};border-radius:8px;padding:14px;display:flex;gap:12px;align-items:center;cursor:{{ s.cursor }};opacity:{{ s.opacity }}" style-hover="border-color:#4964AD">
+<div style="width:36px;height:36px;flex:none;border-radius:9999px;background:{{ s.iconBg }};display:flex;align-items:center;justify-content:center;color:{{ s.iconInk }};font-size:18px"><i class="{{ s.icon }}"></i></div>
+<div style="flex:1;min-width:0">
+<div style="font:600 15px/1.35 Inter,sans-serif;color:#344054">{{ s.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:#738CA5">{{ s.meta }}</div>
+</div>
+<i class="{{ s.trail }}" style="font-size:18px;color:#A3AAB8"></i>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ vLesson }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">{{ lessonTitle }}</div>
+<div style="height:120px;border-radius:8px;background:#E0F3F2;display:flex;align-items:center;justify-content:center;color:#0C7A6C;font-size:48px"><i class="{{ lessonIcon }}"></i></div>
+<sc-for list="{{ lessonCards }}" as="c" hint-placeholder-count="3">
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px">
+<div style="font:600 15px/1.4 Inter,sans-serif;color:#344054">{{ c.head }}</div>
+<div style="font:400 15px/1.6 Inter,sans-serif;color:#57637C;margin-top:6px">{{ c.body }}</div>
+</div>
+</sc-for>
+<button onClick="{{ startBot }}" style="width:100%;min-height:52px;border-radius:4px;background:#4964AD;border:1px solid #4964AD;color:#fff;font:600 16px/1 Inter,sans-serif;cursor:pointer" style-hover="background:#365CC2">{{ lessonCta }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ b0 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="height:132px;border-radius:8px;background:#E0F3F2;display:flex;align-items:center;justify-content:center;color:#0C7A6C;font-size:56px"><i class="ri-robot-2-line"></i></div>
+<div style="font:700 24px/1.25 Inter,sans-serif;color:#344054">This is a practice bot</div>
+<div style="font:400 16px/1.55 Inter,sans-serif;color:#57637C">Nothing here is real. No one sees your answers. You can try again as many times as you want.</div>
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px;align-items:flex-start"><i class="ri-cursor-line" style="color:#4964AD;font-size:18px"></i><span style="font:400 14px/1.5 Inter,sans-serif;color:#344054">You type. The AI answers. You fix your words.</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start"><i class="ri-time-line" style="color:#4964AD;font-size:18px"></i><span style="font:400 14px/1.5 Inter,sans-serif;color:#344054">About 10 minutes.</span></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b1 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">3 rules before you start</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#57637C">Tap each rule to accept it.</div>
+<sc-for list="{{ rules }}" as="r" hint-placeholder-count="3">
+<button onClick="{{ r.toggle }}" style="width:100%;min-height:64px;text-align:left;display:flex;gap:12px;align-items:center;padding:14px;border-radius:8px;background:{{ r.bg }};border:1px solid {{ r.bd }};cursor:pointer" style-hover="border-color:#4964AD">
+<i class="{{ r.icon }}" style="font-size:22px;color:{{ r.iconInk }}"></i>
+<span style="font:500 14px/1.5 Inter,sans-serif;color:#344054">{{ r.text }}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ b2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">Watch one example first</div>
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px">
+<div style="font:600 11px/1 Inter,sans-serif;color:#738CA5;margin-bottom:8px">THE TASK</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">You want a part-time job at a bike shop. You need a WhatsApp message for the shop owner.</div>
+</div>
+<div style="font:600 13px/1 Inter,sans-serif;color:#57637C">A good prompt has 3 parts</div>
+<div style="border-radius:8px;border:1px solid #C5D0E5;background:#E5E9F1;padding:14px">
+<div style="font:600 11px/1 Inter,sans-serif;color:#4964AD;margin-bottom:6px">1 · WHO YOU ARE</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#344054">I am in Grade 10.</div>
+</div>
+<div style="border-radius:8px;border:1px solid #8ED4CF;background:#E0F3F2;padding:14px">
+<div style="font:600 11px/1 Inter,sans-serif;color:#0C7A6C;margin-bottom:6px">2 · WHAT YOU WANT</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#344054">Write a WhatsApp message to a bike shop owner asking for part-time work.</div>
+</div>
+<div style="border-radius:8px;border:1px solid #F3D9AE;background:#FFF4E0;padding:14px">
+<div style="font:600 11px/1 Inter,sans-serif;color:#B67414;margin-bottom:6px">3 · ONE DETAIL</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#344054">Keep it short and polite.</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">Now you build it</div>
+<div style="font:400 15px/1.5 Inter,sans-serif;color:#57637C">Tap one card in each row.</div>
+<div style="font:600 11px/1 Inter,sans-serif;color:#4964AD">1 · WHO YOU ARE</div>
+<sc-for list="{{ rowWho }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:48px;text-align:left;padding:12px 14px;border-radius:4px;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.ink }};font:500 14px/1.45 Inter,sans-serif;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="font:600 11px/1 Inter,sans-serif;color:#0C7A6C">2 · WHAT YOU WANT</div>
+<sc-for list="{{ rowWhat }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:48px;text-align:left;padding:12px 14px;border-radius:4px;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.ink }};font:500 14px/1.45 Inter,sans-serif;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="font:600 11px/1 Inter,sans-serif;color:#B67414">3 · ONE DETAIL</div>
+<sc-for list="{{ rowDet }}" as="c" hint-placeholder-count="2">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:48px;text-align:left;padding:12px 14px;border-radius:4px;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.ink }};font:500 14px/1.45 Inter,sans-serif;cursor:pointer">{{ c.label }}</button>
+</sc-for>
+<div style="padding:14px;border-radius:8px;background:#fff;border:1px dashed #A3AAB8">
+<div style="font:600 11px/1 Inter,sans-serif;color:#738CA5;margin-bottom:8px">YOUR PROMPT</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">{{ builtPrompt }}</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b4 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="align-self:flex-end;max-width:88%;padding:12px 14px;border-radius:8px 8px 2px 8px;background:#4964AD;color:#fff;font:400 14px/1.5 Inter,sans-serif">{{ builtPrompt }}</div>
+<div style="display:flex;gap:8px;align-items:center"><i class="ri-robot-2-line" style="color:#0C7A6C;font-size:18px"></i><span style="font:600 12px/1 Inter,sans-serif;color:#57637C">AI answer</span></div>
+<div style="padding:14px;border-radius:8px;background:#fff;border:1px solid #EAECF0;font:400 15px/1.6 Inter,sans-serif;color:#344054">Namaste sir. I am a Grade 10 student. I want part-time work at your bike shop after school. I can come after 4 pm. Please tell me if any work is open. Thank you.</div>
+<button onClick="{{ toggleWhy }}" style="align-self:flex-start;display:flex;gap:8px;align-items:center;min-height:44px;padding:10px 14px;border-radius:4px;background:#fff;border:1px solid #D4DAE5;cursor:pointer;font:600 13px/1 Inter,sans-serif;color:#4964AD"><i class="{{ whyIcon }}" style="font-size:16px"></i>Why this answer?</button>
+<sc-if value="{{ whyOpen }}" hint-placeholder-val="{{ false }}">
+<div style="padding:14px;border-radius:8px;background:#fff;border:1px solid #EAECF0;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px"><span style="font:600 11px/1.6 Inter,sans-serif;color:#4964AD;min-width:38px">WHO</span><span style="font:400 14px/1.5 Inter,sans-serif;color:#344054">You said Grade 10, so it wrote "after school".</span></div>
+<div style="display:flex;gap:10px"><span style="font:600 11px/1.6 Inter,sans-serif;color:#0C7A6C;min-width:38px">WHAT</span><span style="font:400 14px/1.5 Inter,sans-serif;color:#344054">You asked for a message, so it wrote a message, not a list.</span></div>
+<div style="display:flex;gap:10px"><span style="font:600 11px/1.6 Inter,sans-serif;color:#B67414;min-width:38px">DETAIL</span><span style="font:400 14px/1.5 Inter,sans-serif;color:#344054">You said short and polite, so it is five short lines.</span></div>
+<div style="padding-top:8px;border-top:1px solid #EAECF0;font:400 13px/1.5 Inter,sans-serif;color:#57637C">Check before you send: the AI guessed "after 4 pm". Change it if that is wrong.</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ b5 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">Your turn. No cards this time.</div>
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px">
+<div style="font:600 11px/1 Inter,sans-serif;color:#738CA5;margin-bottom:8px">THE TASK</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">A tap in the workshop is leaking. Ask the AI what tools you need.</div>
+</div>
+<button onClick="{{ speak }}" style="width:100%;min-height:56px;display:flex;gap:10px;align-items:center;justify-content:center;border-radius:8px;background:#E0F3F2;border:1px solid #8ED4CF;cursor:pointer;font:600 15px/1 Inter,sans-serif;color:#0C7A6C"><i class="ri-mic-line" style="font-size:22px"></i>Speak instead of typing</button>
+<textarea value="{{ typed }}" onChange="{{ onType }}" rows="4" placeholder="Type your prompt here" style="width:100%;box-sizing:border-box;padding:14px;border-radius:4px;border:1px solid #A3AAB8;font:400 15px/1.5 Inter,sans-serif;color:#344054;resize:none"></textarea>
+<div style="font:400 12px/1.45 Inter,sans-serif;color:#738CA5">Stuck? Tap a starter and change the words.</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ starters }}" as="s" hint-placeholder-count="3">
+<button onClick="{{ s.use }}" style="min-height:44px;padding:10px 14px;border-radius:9999px;background:#fff;border:1px solid #D4DAE5;cursor:pointer;font:500 13px/1.35 Inter,sans-serif;color:#4964AD">{{ s.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ b6 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="align-self:flex-end;max-width:88%;padding:12px 14px;border-radius:8px 8px 2px 8px;background:#4964AD;color:#fff;font:400 14px/1.5 Inter,sans-serif">{{ typed }}</div>
+<sc-if value="{{ vUnsafe }}" hint-placeholder-val="{{ false }}">
+<div style="padding:14px;border-radius:8px;background:#FDECEC;border:1px solid #E61D1D;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px;align-items:center"><i class="ri-shield-cross-line" style="color:#E61D1D;font-size:22px"></i><span style="font:700 15px/1.35 Inter,sans-serif;color:#B01212">Stop. Remove your personal details.</span></div>
+<div style="font:400 14px/1.55 Inter,sans-serif;color:#344054">I did not send this. Your prompt has a phone number, name or address. Never put these into an AI tool.</div>
+<div style="font:400 14px/1.55 Inter,sans-serif;color:#344054">Ask about the work only: "What tools do I need to fix a leaking tap?"</div>
+</div>
+</sc-if>
+<sc-if value="{{ vOff }}" hint-placeholder-val="{{ false }}">
+<div style="padding:14px;border-radius:8px;background:#FFF4E0;border:1px solid #EFA12B;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;gap:10px;align-items:center"><i class="ri-information-line" style="color:#B67414;font-size:22px"></i><span style="font:700 15px/1.35 Inter,sans-serif;color:#B67414">This bot is for study and work</span></div>
+<div style="font:400 14px/1.55 Inter,sans-serif;color:#344054">Your question is off the task. Try the tap task again.</div>
+</div>
+</sc-if>
+<sc-if value="{{ vAnswer }}" hint-placeholder-val="{{ false }}">
+<div style="padding:14px;border-radius:8px;background:#fff;border:1px solid #EAECF0;font:400 15px/1.6 Inter,sans-serif;color:#344054">{{ aiReply }}</div>
+</sc-if>
+<div style="padding:14px;border-radius:8px;background:#fff;border:1px solid #EAECF0;display:flex;flex-direction:column;gap:12px">
+<div style="font:600 13px/1.35 Inter,sans-serif;color:#57637C">Your prompt had {{ scoreText }}</div>
+<sc-for list="{{ meter }}" as="m" hint-placeholder-count="3">
+<div style="display:flex;gap:10px;align-items:flex-start">
+<i class="{{ m.icon }}" style="font-size:18px;color:{{ m.ink }}"></i>
+<div style="flex:1;min-width:0">
+<div style="font:600 13px/1.4 Inter,sans-serif;color:#344054">{{ m.label }}</div>
+<div style="font:400 13px/1.5 Inter,sans-serif;color:#57637C">{{ m.note }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<button onClick="{{ retry }}" style="width:100%;min-height:48px;border-radius:4px;background:#fff;border:1px solid #4964AD;color:#4964AD;font:600 15px/1 Inter,sans-serif;cursor:pointer">Change My Prompt</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ b7 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font:700 22px/1.3 Inter,sans-serif;color:#344054">One question before you finish</div>
+<div style="font:400 16px/1.55 Inter,sans-serif;color:#57637C">Can you write a prompt on your own now?</div>
+<sc-for list="{{ confOpts }}" as="c" hint-placeholder-count="3">
+<button onClick="{{ c.pick }}" style="width:100%;min-height:56px;text-align:left;padding:14px;border-radius:8px;background:{{ c.bg }};border:1px solid {{ c.bd }};cursor:pointer;font:600 15px/1.35 Inter,sans-serif;color:#344054">{{ c.label }}</button>
+</sc-for>
+<sc-if value="{{ confDone }}" hint-placeholder-val="{{ false }}">
+<div style="padding:14px;border-radius:8px;background:#E0F3F2;border:1px solid #8ED4CF;font:400 14px/1.55 Inter,sans-serif;color:#344054">{{ confNote }}</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ b8 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="height:100px;border-radius:8px;background:#E0F3F2;display:flex;align-items:center;justify-content:center;color:#0C7A6C;font-size:44px"><i class="ri-checkbox-circle-line"></i></div>
+<div style="font:700 24px/1.25 Inter,sans-serif;color:#344054">Step 2 done</div>
+<div style="background:#fff;border:1px solid #EAECF0;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="font:600 12px/1 Inter,sans-serif;color:#738CA5">YOU CAN NOW</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">1. Write a prompt with who, what and one detail.</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">2. Check an AI answer before you use it.</div>
+<div style="font:400 15px/1.55 Inter,sans-serif;color:#344054">3. Keep your personal details out of AI tools.</div>
+</div>
+<div style="padding:14px;border-radius:8px;background:#E5E9F1;border:1px solid #C5D0E5;font:400 14px/1.55 Inter,sans-serif;color:#344054"><b>Step 3 is now open:</b> Check a wrong answer.</div>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{ inBot }}" hint-placeholder-val="{{ false }}">
+<div style="position:sticky;bottom:0;padding:12px 16px 16px;background:#fff;border-top:1px solid #EAECF0;display:flex;gap:10px;align-items:center">
+<sc-if value="{{ canBack }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ botBack }}" style="width:48px;height:48px;flex:none;border-radius:4px;background:#fff;border:1px solid #D4DAE5;cursor:pointer;color:#57637C;font-size:20px"><i class="ri-arrow-left-line"></i></button>
+</sc-if>
+<sc-if value="{{ ctaOn }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ botNext }}" style="flex:1;min-height:48px;border-radius:4px;background:#4964AD;border:1px solid #4964AD;color:#fff;font:600 16px/1 Inter,sans-serif;cursor:pointer" style-hover="background:#365CC2">{{ ctaLabel }}</button>
+</sc-if>
+<sc-if value="{{ ctaOff }}" hint-placeholder-val="{{ false }}">
+<button disabled="true" style="flex:1;min-height:48px;border-radius:4px;background:#4964AD;border:1px solid #4964AD;color:#fff;font:600 16px/1 Inter,sans-serif;opacity:.4;cursor:not-allowed">{{ ctaLabel }}</button>
+</sc-if>
+</div>
+</sc-if>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:800}}">
+const STEPS = [
+  { title: 'What AI can and cannot do', meta: '4 min read', icon: 'ri-book-2-line', kind: 'lesson' },
+  { title: 'Practice Bot — First Contact', meta: 'Practice · 10 min', icon: 'ri-robot-2-line', kind: 'bot' },
+  { title: 'Check a wrong answer', meta: 'Practice · 8 min', icon: 'ri-search-eye-line', kind: 'locked' },
+  { title: 'Keep your details safe', meta: '5 min read', icon: 'ri-shield-check-line', kind: 'locked' },
+  { title: 'Use AI in your trade', meta: 'Final task · 15 min', icon: 'ri-tools-line', kind: 'locked' }
+];
+const LESSON = [
+  { head: 'AI answers what you ask', body: 'AI reads your words and writes an answer. It does not know you. It only knows what you type.' },
+  { head: 'Better words, better answer', body: 'If you say who you are and what you want, the answer fits your work.' },
+  { head: 'AI can be wrong', body: 'Check any fact before you use it in real work. Ask your instructor if you are unsure.' }
+];
+const RULES = [
+  'Do not type your name, phone number or address.',
+  'AI can be wrong. Check facts before you use them.',
+  'Ask only about study or work.'
+];
+const WHO = ['I am in Grade 10', 'I finished ITI welding'];
+const WHAT = ['Write a WhatsApp message to a bike shop owner asking for part-time work', 'Explain what a bike mechanic does'];
+const DET = ['Keep it short and polite', 'Use simple English'];
+const STARTERS = ['tools for leaking tap', 'I am an ITI student…', 'Make a simple list'];
+const CTA = ['Start Practice', 'I Understand', 'Now You Try', 'Send Prompt', 'Next', 'Send Prompt', 'Next', 'Next', 'Back to Course'];
+
+class Component extends DCLogic {
+  state = { view: 'home', done: [false, false, false, false, false], step: 0,
+    rules: [false, false, false], who: null, what: null, det: null,
+    typed: '', verdict: null, whyOpen: false, conf: null };
+
+  set(p) { this.setState(p); }
+  reset() { this.set({ step: 0, rules: [false, false, false], who: null, what: null, det: null, typed: '', verdict: null, whyOpen: false, conf: null }); }
+
+  judge(t) {
+    const s = (t || '').toLowerCase();
+    if (/\d{6,}|my name is|phone|address|aadhaar|mobile number/.test(s)) return 'unsafe';
+    if (/cricket|movie|song|game|film|ipl|joke/.test(s)) return 'off';
+    if (s.trim().length < 25) return 'weak';
+    return 'good';
+  }
+
+  chipRow(list, key) {
+    return list.map((label, i) => {
+      const on = this.state[key] === i;
+      return { label, bg: on ? '#E5E9F1' : '#FFFFFF', bd: on ? '#4964AD' : '#D4DAE5',
+        ink: on ? '#1F3473' : '#344054', pick: () => this.set({ [key]: i }) };
+    });
+  }
+
+  renderVals() {
+    const st = this.state, view = st.view, step = st.step;
+    const inBot = view === 'bot';
+    const doneCount = st.done.filter(Boolean).length;
+
+    const parts = [];
+    if (st.who !== null) parts.push(WHO[st.who] + '.');
+    if (st.what !== null) parts.push(WHAT[st.what] + '.');
+    if (st.det !== null) parts.push(DET[st.det]);
+    const built = parts.length ? parts.join(' ') : 'Tap a card above to start your prompt.';
+
+    const s = (st.typed || '').toLowerCase();
+    const hasWho = /grade|student|iti|i am|apprentice/.test(s);
+    const hasWhat = /tool|tap|leak|fix|need|what|how/.test(s);
+    const hasDet = s.trim().split(/\s+/).filter(Boolean).length >= 9;
+    const mk = (ok, label, yes, no) => ({ ok, label,
+      icon: ok ? 'ri-checkbox-circle-fill' : 'ri-error-warning-fill',
+      ink: ok ? '#14BA6D' : '#EFA12B', note: ok ? yes : no });
+    const meter = [
+      mk(hasWho, 'Who you are', 'You said you are a student.', 'Add who you are, e.g. "I am an ITI student".'),
+      mk(hasWhat, 'What you want', 'You asked about tools for the tap.', 'Say the job clearly: fix a leaking tap.'),
+      mk(hasDet, 'One detail', 'You added enough detail.', 'Add one detail, e.g. "make a simple list".')
+    ];
+    const okCount = meter.filter(x => x.ok).length;
+
+    let ctaEnabled = true;
+    if (step === 1) ctaEnabled = st.rules.every(Boolean);
+    if (step === 3) ctaEnabled = st.who !== null && st.what !== null && st.det !== null;
+    if (step === 5) ctaEnabled = st.typed.trim().length > 3;
+    if (step === 7) ctaEnabled = st.conf !== null;
+
+    const openStep = i => {
+      const k = STEPS[i].kind;
+      if (k === 'locked' && !st.done[i - 1]) return;
+      if (k === 'bot') { this.reset(); this.set({ view: 'bot' }); return; }
+      this.set({ view: 'lesson', lesson: i });
+    };
+    const nextIdx = st.done.findIndex(d => !d);
+    const cur = nextIdx < 0 ? 4 : nextIdx;
+
+    const confNotes = ['That is fine. This step stays open. Do it again with the cards on.',
+      'Good. Try one more prompt with no cards before Step 3.',
+      'Good. Step 3 gives you a harder task with no cards.'];
+
+    return {
+      atHome: view === 'home', canExit: view !== 'home', vHome: view === 'home',
+      vLesson: view === 'lesson', inBot,
+      headTitle: view === 'home' ? 'Swift AI Academy' : inBot ? 'Practice Bot' : 'Step ' + ((st.lesson ?? 0) + 1),
+      headSub: view === 'home' ? 'Applied AI · Level 1' : inBot ? 'Step 2 · First Contact' : 'Applied AI · Level 1',
+      coursePct: Math.round((doneCount / 5) * 100) + '%',
+      courseCount: doneCount + ' of 5 done',
+      currentTitle: STEPS[cur].title,
+      currentSub: STEPS[cur].meta,
+      currentCta: doneCount === 0 ? 'Start' : 'Continue',
+      openCurrent: () => openStep(cur),
+      steps: STEPS.map((x, i) => {
+        const done = st.done[i];
+        const locked = x.kind === 'locked' && !st.done[i - 1];
+        return { title: x.title, meta: done ? 'Done · you can repeat it' : locked ? 'Opens after step ' + i : x.meta,
+          icon: done ? 'ri-checkbox-circle-fill' : locked ? 'ri-lock-line' : x.icon,
+          iconBg: done ? '#DFF6E8' : locked ? '#F3F3F3' : '#E5E9F1',
+          iconInk: done ? '#0E8A4F' : locked ? '#A3AAB8' : '#4964AD',
+          bg: '#FFFFFF', bd: locked ? '#EAECF0' : '#D4DAE5',
+          opacity: locked ? '0.55' : '1', cursor: locked ? 'not-allowed' : 'pointer',
+          trail: locked ? 'ri-lock-line' : 'ri-arrow-right-s-line',
+          open: () => openStep(i) };
+      }),
+      lessonTitle: STEPS[st.lesson ?? 0].title,
+      lessonIcon: STEPS[st.lesson ?? 0].icon,
+      lessonCards: LESSON,
+      lessonCta: 'Practice With The Bot',
+      startBot: () => { this.reset(); this.set({ view: 'bot' }); },
+      goHome: () => this.set({ view: 'home' }),
+      b0: inBot && step === 0, b1: inBot && step === 1, b2: inBot && step === 2,
+      b3: inBot && step === 3, b4: inBot && step === 4, b5: inBot && step === 5,
+      b6: inBot && step === 6, b7: inBot && step === 7, b8: inBot && step === 8,
+      botPct: Math.round(((step + 1) / 9) * 100) + '%',
+      botStepLabel: (step + 1) + ' of 9',
+      rules: RULES.map((text, i) => ({ text,
+        bg: st.rules[i] ? '#E0F3F2' : '#FFFFFF', bd: st.rules[i] ? '#8ED4CF' : '#D4DAE5',
+        icon: st.rules[i] ? 'ri-checkbox-circle-fill' : 'ri-checkbox-blank-circle-line',
+        iconInk: st.rules[i] ? '#0C7A6C' : '#A3AAB8',
+        toggle: () => { const r = st.rules.slice(); r[i] = !r[i]; this.set({ rules: r }); } })),
+      rowWho: this.chipRow(WHO, 'who'), rowWhat: this.chipRow(WHAT, 'what'), rowDet: this.chipRow(DET, 'det'),
+      builtPrompt: built,
+      whyOpen: st.whyOpen, whyIcon: st.whyOpen ? 'ri-arrow-up-s-line' : 'ri-question-line',
+      toggleWhy: () => this.set({ whyOpen: !st.whyOpen }),
+      typed: st.typed, onType: e => this.set({ typed: e.target.value }),
+      starters: STARTERS.map(label => ({ label, use: () => this.set({ typed:
+        label === 'tools for leaking tap' ? 'What tools do I need to fix a leaking tap?'
+        : label === 'Make a simple list' ? (st.typed + ' Make a simple list.').trim()
+        : 'I am an ITI student. ' + st.typed }) })),
+      speak: () => this.set({ typed: 'I am an ITI student. What tools do I need to fix a leaking tap? Make a simple list.' }),
+      vUnsafe: st.verdict === 'unsafe', vOff: st.verdict === 'off',
+      vAnswer: st.verdict === 'good' || st.verdict === 'weak',
+      aiReply: st.verdict === 'good'
+        ? 'You will need: 1. Pipe wrench. 2. Adjustable spanner. 3. New washer or O-ring. 4. Teflon tape. 5. A cloth and bucket. Close the main valve first.'
+        : 'I am not sure what you need. Tell me the job and one detail.',
+      scoreText: okCount + ' of 3 parts', meter,
+      confOpts: ['Not yet', 'Almost', 'Yes, I can'].map((label, i) => ({ label,
+        bg: st.conf === i ? '#E5E9F1' : '#FFFFFF', bd: st.conf === i ? '#4964AD' : '#D4DAE5',
+        pick: () => this.set({ conf: i }) })),
+      confDone: st.conf !== null, confNote: st.conf !== null ? confNotes[st.conf] : '',
+      ctaLabel: CTA[step], ctaOn: ctaEnabled, ctaOff: !ctaEnabled,
+      canBack: step > 0,
+      botBack: () => this.set({ step: Math.max(0, step - 1) }),
+      retry: () => this.set({ step: 5, verdict: null }),
+      botNext: () => {
+        if (step === 5) { this.set({ verdict: this.judge(st.typed), step: 6 }); return; }
+        if (step === 8) {
+          const d = st.done.slice(); d[0] = true; d[1] = true;
+          this.set({ done: d, view: 'home' }); this.reset(); return;
+        }
+        this.set({ step: step + 1 });
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

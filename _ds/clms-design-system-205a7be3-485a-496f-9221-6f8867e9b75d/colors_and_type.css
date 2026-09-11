@@ -1,0 +1,243 @@
+/* =============================================================
+   ConveGenius CLMS — Colors + Typography tokens
+   Source: Figma "UI CLMS" Style-Guide page + CLMS_Design_System.md
+   ============================================================= */
+
+:root {
+  /* -------- PRIMARY (indigo blue from logo) -------- */
+  --primary-1000: #1F3473;
+  --primary-500:  #365CC2;   /* hover */
+  --primary-400:  #4469CF;   /* focus/pressed */
+  --primary-300:  #4964AD;   /* brand base — login panel, primary buttons */
+  --primary-200:  #C5D0E5;
+  --primary-150:  #D4DAE5;
+  --primary-100:  #E5E9F1;
+  --primary-50:   #F9FAFC;
+
+  /* -------- NEUTRALS (Bluish-grey scale) -------- */
+  --grey-900:  #344054;   /* text/primary */
+  --grey-700:  #3C465C;
+  --grey-500:  #57637C;   /* text/secondary */
+  --grey-450:  #738CA5;   /* text/tertiary */
+  --grey-400:  #8692A6;
+  --grey-300:  #A3AAB8;
+  --grey-250:  #C5D0E5;
+  --grey-200:  #D4DAE5;
+  --grey-150:  #E5E9F1;
+  --grey-100:  #EAECF0;
+  --grey-50:   #F3F3F3;
+  --white:     #FFFFFF;
+  --black:     #000000;
+
+  /* -------- BRAND ACCENT -------- */
+  --brand-yellow: #EFA12B;
+  --brand-mint:   #8ED4CF;   /* from ConveGenius logo crest */
+  --brand-mint-soft: #E0F3F2;
+  --brand-violet: #4A4C9F;   /* deeper logo shade */
+
+  /* -------- SUPPORT / FEEDBACK -------- */
+  --support-info:    #1F9CFC;   /* link blue too */
+  --support-success: #14BA6D;
+  --support-warning: #EFA12B;
+  --support-error:   #E61D1D;
+
+  /* -------- CHIP / TAG colors (status + categorical) -------- */
+  --chip-blue:   #1F9CFC;
+  --chip-green:  #14BA6D;
+  --chip-yellow: #ECE92F;
+  --chip-orange: #EFA12B;
+  --chip-mint:   #8ED4CF;
+  --chip-cyan:   #E0F3F2;
+  --chip-pink:   #F3A6C4;
+  --chip-lilac:  #B8A6F3;
+  --chip-red:    #E61D1D;
+
+  /* -------- WORKFLOW STATUS (tinted bg + ink) -------- */
+  --status-draft-bg:     #F3F3F3;  --status-draft-ink:     #57637C;
+  --status-review-bg:    #FFF4E0;  --status-review-ink:    #B67414;
+  --status-approved-bg:  #E0F3F2;  --status-approved-ink:  #0C7A6C;
+  --status-published-bg: #DFF6E8;  --status-published-ink: #0E8A4F;
+  --status-archived-bg:  #EAECF0;  --status-archived-ink:  #344054;
+
+  /* -------- SEMANTIC SURFACES -------- */
+  --bg-page:    #F9FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-subtle:  #F3F3F3;
+  --bg-brand:   #4964AD;
+  --bg-brand-gradient: linear-gradient(180deg, #4A4C9F 0%, #8ED4CF 100%);
+
+  /* -------- SEMANTIC TEXT -------- */
+  --text-primary:   var(--grey-900);
+  --text-secondary: var(--grey-500);
+  --text-tertiary:  var(--grey-450);
+  --text-inverse:   #FFFFFF;
+  --text-brand:     var(--primary-300);
+  --text-link:      var(--support-info);
+
+  /* -------- SEMANTIC BORDERS -------- */
+  --border-subtle:  #EAECF0;
+  --border-default: #D4DAE5;
+  --border-strong:  #A3AAB8;
+  --border-brand:   var(--primary-300);
+  --border-focus:   #1565D8;
+
+  /* -------- ICONS -------- */
+  --icon-default: var(--grey-900);
+  --icon-subtle:  var(--grey-450);
+  --icon-brand:   var(--primary-300);
+
+  /* -------- TYPOGRAPHY: families -------- */
+  --font-base:    "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* -------- TYPOGRAPHY: weights -------- */
+  --fw-regular:  400;   /* @kind font */
+  --fw-medium:   500;   /* @kind font */
+  --fw-semibold: 600;   /* @kind font */
+  --fw-bold:     700;   /* @kind font */
+
+  /* -------- TYPOGRAPHY: scale (px) -------- */
+  --fs-display-xl: 48px;
+  --fs-display-lg: 40px;
+  --fs-h1:         32px;
+  --fs-h2:         24px;
+  --fs-h3:         20px;
+  --fs-h4:         18px;
+  --fs-body-lg:    16px;
+  --fs-body-md:    14px;
+  --fs-body-sm:    13px;
+  --fs-caption:    12px;
+
+  --lh-display-xl: 56px;
+  --lh-display-lg: 48px;
+  --lh-h1:         40px;
+  --lh-h2:         32px;
+  --lh-h3:         28px;
+  --lh-h4:         24px;
+  --lh-body-lg:    24px;
+  --lh-body-md:    20px;
+  --lh-body-sm:    18px;
+  --lh-caption:    16px;
+
+  --ls-tight:  -0.01em;
+  --ls-normal: 0;        /* @kind font */
+  --ls-wide:   0.04em;
+
+  /* -------- SPACING (8pt) -------- */
+  --space-0:  0;
+  --space-1:  2px;
+  --space-2:  4px;
+  --space-3:  6px;
+  --space-4:  8px;
+  --space-5:  12px;
+  --space-6:  16px;
+  --space-8:  20px;
+  --space-10: 24px;
+  --space-12: 32px;
+  --space-16: 40px;
+  --space-20: 56px;
+
+  /* -------- RADIUS -------- */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;     /* default for buttons + inputs */
+  --radius-lg:   8px;     /* default for cards */
+  --radius-xl:   12px;
+  --radius-2xl:  16px;
+  --radius-full: 9999px;
+
+  /* -------- STROKE -------- */
+  --stroke-hairline: 1px;
+  --stroke-default:  1px;
+  --stroke-strong:   2px;
+
+  /* -------- OPACITY -------- */
+  --opacity-subtle:   0.04;   /* @kind other */
+  --opacity-soft:     0.08;   /* @kind other */
+  --opacity-medium:   0.40;   /* @kind other */
+  --opacity-disabled: 0.40;   /* @kind other */
+  --opacity-overlay:  0.60;   /* @kind other */
+
+  /* -------- ELEVATION -------- */
+  --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 10px 3px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.14);
+  --shadow-popover: 0 4px 5.2px 0 rgba(193,193,193,0.25);
+}
+
+/* =============================================================
+   Semantic element styles — use these directly.
+   ============================================================= */
+
+html, body {
+  font-family: var(--font-base);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  color: var(--text-primary);
+  letter-spacing: var(--ls-tight);
+}
+h2, .h2 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  color: var(--text-primary);
+}
+h3, .h3 {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  color: var(--text-primary);
+}
+h4, .h4 {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  color: var(--text-primary);
+}
+.display-xl {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display-xl);
+  letter-spacing: var(--ls-tight);
+}
+.display-lg {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display-lg);
+  line-height: var(--lh-display-lg);
+  letter-spacing: var(--ls-tight);
+}
+
+p, .body-md {
+  font-size: var(--fs-body-md);
+  line-height: var(--lh-body-md);
+  color: var(--text-primary);
+}
+.body-lg { font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); }
+.body-sm { font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); }
+.caption { font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--text-tertiary); }
+
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary  { color: var(--text-tertiary); }
+.text-brand     { color: var(--text-brand); }
+.text-link      { color: var(--text-link); }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+}
